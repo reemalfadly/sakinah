@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>سكينة: مواقيت الصلاة والأذكار</title>
+<meta name="description" content="مواقيت صلاة دون إنترنت، أذان، أذكار، قرآن وقبلة. بلا إعلانات ولا حساب.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#052d32">
+<link rel="icon" type="image/png" sizes="180x180" href="assets/icon-180.png">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<link rel="preload" href="assets/plex-arabic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/plex-arabic-700.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+/* الخط: IBM Plex Sans Arabic (ترخيص OFL، النص في assets/ibmplexsansarabic-OFL.txt)، مضمّن محليًا */
+@font-face{font-family:"IBM Plex Sans Arabic";font-weight:400;font-style:normal;font-display:swap;src:url(assets/plex-arabic-400.woff2) format("woff2")}
+@font-face{font-family:"IBM Plex Sans Arabic";font-weight:600;font-style:normal;font-display:swap;src:url(assets/plex-arabic-600.woff2) format("woff2")}
+@font-face{font-family:"IBM Plex Sans Arabic";font-weight:700;font-style:normal;font-display:swap;src:url(assets/plex-arabic-700.woff2) format("woff2")}
+
+/* ---------- رموز التصميم (من velvet.css في التطبيق) ---------- */
+:root{
+  --bg:#eef8f9; --paper:#ffffff; --ink:#0a2528; --muted:#46605f; --line:#d3e8ea;
+  --accent:#067682; --soft:#def2f3; --gold:#775712; --gold-line:#c9a24a;
+  --shadow:0 1px 0 #fff inset,0 12px 28px -14px rgba(5,44,50,.22);
+  /* مقياس طباعي 1.25 على أساس 16px، وتباعد 4/8 */
+  --f-sm:.8rem; --f-base:1rem; --f-md:1.25rem; --f-lg:1.563rem; --f-xl:1.953rem; --f-2xl:2.441rem; --f-3xl:3.052rem;
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px; --s7:48px; --s8:64px; --s9:96px;
+  --radius:20px; --max:1120px;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#061f22; --paper:#0b2b2f; --ink:#e9f6f7; --muted:#a6c4c6; --line:rgba(160,212,215,.2);
+    --accent:#45d6e0; --soft:#0f3639; --gold:#e3bf68; --gold-line:#a98a3f;
+    --shadow:0 14px 30px -16px rgba(0,0,0,.6);
+  }
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"IBM Plex Sans Arabic",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;
+  font-size:var(--f-base); line-height:1.85; letter-spacing:0;
+  overflow-x:clip; -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,p,ul,figure{margin:0}
+ul{padding:0;list-style:none}
+img{display:block;max-width:100%;height:auto}
+a{color:var(--accent);text-underline-offset:.2em}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+bdi{unicode-bidi:isolate}
+.wrap{width:100%;max-width:var(--max);margin-inline:auto;padding-inline:var(--s5)}
+@media (max-width:380px){.wrap{padding-inline:var(--s4)}}
+.skip{position:absolute;inset-inline-start:var(--s4);top:-80px;background:#fff;color:#052d32;padding:var(--s3) var(--s4);border-radius:10px;z-index:10;font-weight:600}
+.skip:focus{top:var(--s3)}
+
+/* ---------- عناوين الأقسام ---------- */
+.eyebrow{display:flex;align-items:center;gap:var(--s3);color:var(--gold);font-size:var(--f-sm);font-weight:600;line-height:1.4}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--gold-line)}
+h2{font-size:var(--f-xl);line-height:1.4;font-weight:700;margin-top:var(--s3);max-width:22ch;text-wrap:balance}
+.section{padding-block:var(--s8)}
+@media (min-width:900px){.section{padding-block:var(--s9)}h2{font-size:var(--f-2xl)}}
+.lead{color:var(--muted);max-width:60ch;margin-top:var(--s4)}
+
+/* ---------- البطل: مخملي تركوازي وأسود مع ذهبي ---------- */
+.velvet{
+  --v-ink:#eef9f9; --v-muted:#bcd8da; --v-gold:#f0d28a; --v-accent:#7fe3ea;
+  color:var(--v-ink);
+  background:
+    radial-gradient(70% 60% at 50% 0%,rgba(14,168,184,.32) 0%,rgba(14,168,184,0) 70%),
+    linear-gradient(175deg,#08414a 0%,#052d32 48%,#031a1c 100%);
+}
+.velvet a{color:var(--v-accent)}
+.velvet :focus-visible{outline-color:var(--v-gold)}
+.velvet .eyebrow{color:var(--v-gold)}
+.velvet .eyebrow::before{background:rgba(240,210,138,.6)}
+.hero{border-bottom:1px solid rgba(227,191,104,.5)}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:var(--s4);padding-block:var(--s3)}
+.topbar b{font-weight:700;font-size:var(--f-md)}
+.topbar nav{display:flex;gap:var(--s4);flex-wrap:wrap}
+.topbar nav a{color:var(--v-muted);text-decoration:none;font-size:.875rem;min-height:44px;display:inline-flex;align-items:center;padding-inline:2px}
+.topbar nav a:hover{color:#fff;text-decoration:underline}
+.hero-body{text-align:center;padding-block:var(--s7) var(--s8);display:flex;flex-direction:column;align-items:center}
+@media (min-width:900px){.hero-body{padding-block:var(--s8) var(--s9)}}
+.app-icon{
+  width:112px;height:112px;border-radius:26px;
+  box-shadow:0 0 0 1px rgba(240,210,138,.55),0 0 56px -4px rgba(14,168,184,.55),0 22px 40px -18px rgba(0,0,0,.7);
+}
+h1{font-size:var(--f-2xl);line-height:1.3;font-weight:700;margin-top:var(--s5)}
+@media (min-width:900px){h1{font-size:var(--f-3xl)}}
+.tagline{color:var(--v-gold);font-size:var(--f-md);font-weight:600;margin-top:var(--s2);line-height:1.6}
+.hero .lead{color:var(--v-muted);margin-top:var(--s5);font-size:1.0625rem}
+.cta{margin-top:var(--s6);display:flex;flex-direction:column;align-items:center;gap:var(--s3)}
+.btn-soon{
+  font:inherit;font-weight:600;font-size:var(--f-base);line-height:1.4;
+  min-height:52px;padding:var(--s3) var(--s6);border-radius:999px;
+  color:#f6e6b8;background:rgba(255,255,255,.07);
+  border:1px dashed rgba(240,210,138,.7);cursor:not-allowed;
+}
+.cta small{color:var(--v-muted);font-size:.875rem;line-height:1.6}
+
+/* ---------- المميزات ---------- */
+.grid{display:grid;gap:var(--s4);margin-top:var(--s6);grid-template-columns:1fr}
+@media (min-width:640px){.grid{grid-template-columns:repeat(2,1fr);gap:var(--s5)}}
+@media (min-width:960px){.grid{grid-template-columns:repeat(3,1fr)}}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:var(--s5);box-shadow:var(--shadow)}
+.ico{width:48px;height:48px;border-radius:14px;background:var(--soft);color:var(--accent);display:grid;place-items:center;margin-bottom:var(--s4)}
+.ico svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.card h3{font-size:var(--f-md);line-height:1.5;font-weight:600}
+.card p{color:var(--muted);margin-top:var(--s2);font-size:var(--f-base)}
+
+/* ---------- المعرض: شريط أفقي ---------- */
+.strip-head{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--s4);flex-wrap:wrap}
+.hint{color:var(--muted);font-size:.875rem;margin:0}
+.strip{
+  display:flex;gap:var(--s4);overflow-x:auto;overscroll-behavior-x:contain;
+  scroll-snap-type:x proximity;padding:var(--s5) var(--s5) var(--s5);margin-top:var(--s3);
+  scrollbar-width:thin;scrollbar-color:var(--accent) transparent;
+}
+.strip:focus-visible{outline-offset:-3px}
+.strip figure{flex:0 0 clamp(200px,62vw,260px);scroll-snap-align:center}
+.strip img{width:100%;aspect-ratio:9/16;border-radius:22px;border:1px solid var(--line);box-shadow:var(--shadow);background:var(--soft)}
+.strip figcaption{margin-top:var(--s3);font-size:.9375rem;line-height:1.6;color:var(--muted)}
+.strip figcaption b{display:block;color:var(--ink);font-weight:600}
+.strip-wrap{max-width:var(--max);margin-inline:auto}
+
+/* ---------- خصوصيتك ---------- */
+.privacy .lead{color:var(--v-muted)}
+.privacy h2{color:var(--v-ink)}
+.points{display:grid;gap:var(--s5);margin-top:var(--s6);grid-template-columns:1fr}
+@media (min-width:800px){.points{grid-template-columns:repeat(3,1fr);gap:var(--s6)}}
+.point{border-top:1px solid rgba(240,210,138,.45);padding-top:var(--s5)}
+.num{
+  width:40px;height:40px;border-radius:50%;display:grid;place-items:center;
+  border:1px solid rgba(240,210,138,.65);color:var(--v-gold);font-weight:600;font-size:var(--f-base);line-height:1;
+}
+.point h3{font-size:var(--f-md);line-height:1.5;font-weight:600;margin-top:var(--s4)}
+.point p{color:var(--v-muted);margin-top:var(--s2)}
+.policy{margin-top:var(--s6);color:var(--v-muted)}
+.policy a{color:var(--v-gold);font-weight:600}
+
+/* ---------- ملاحظات ---------- */
+.notes{margin-top:var(--s5);display:grid;gap:var(--s4)}
+.notes li{position:relative;padding-inline-start:var(--s5);color:var(--muted);max-width:70ch}
+.notes li::before{content:"";position:absolute;inset-inline-start:0;top:.8em;width:8px;height:8px;background:var(--gold-line);transform:rotate(45deg)}
+.notes b{color:var(--ink);font-weight:600}
+.closing{text-align:center;padding-block:var(--s7) 0}
+.closing .btn-soon{color:var(--gold);background:var(--soft);border-color:var(--gold-line)}
+.closing small{display:block;margin-top:var(--s3);color:var(--muted);font-size:.875rem}
+
+/* ---------- القسم الإنجليزي ---------- */
+.en{background:var(--paper);border-block:1px solid var(--line)}
+.en .eyebrow{letter-spacing:0}
+.en h2{max-width:none}
+.en ul{margin-top:var(--s5);display:grid;gap:var(--s3);max-width:68ch}
+.en li{position:relative;padding-inline-start:var(--s5);color:var(--muted)}
+.en li::before{content:"";position:absolute;inset-inline-start:0;top:.8em;width:8px;height:8px;background:var(--gold-line);transform:rotate(45deg)}
+.en p{max-width:68ch}
+.en .small{margin-top:var(--s5);color:var(--muted);font-size:.9375rem}
+
+/* ---------- التذييل ---------- */
+footer.velvet{padding-block:var(--s7)}
+footer p{margin:0}
+footer .pub{font-weight:600;font-size:var(--f-md)}
+footer .pub a{color:var(--v-ink)}
+footer .meta{margin-top:var(--s3);color:var(--v-muted);display:flex;flex-wrap:wrap;gap:var(--s2) var(--s5)}
+footer .meta a{overflow-wrap:anywhere}
+footer .legal{margin-top:var(--s5);color:var(--v-muted);font-size:.875rem}
+footer .legal a{color:var(--v-muted)}
+
+@media print{.velvet{background:#fff;color:#000}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">انتقل إلى المحتوى</a>
+
+<header class="velvet hero">
+  <div class="wrap">
+    <div class="topbar">
+      <b>سكينة</b>
+      <nav aria-label="أقسام الصفحة">
+        <a href="#features">المميزات</a>
+        <a href="#screens">اللقطات</a>
+        <a href="#privacy">الخصوصية</a>
+        <a href="#en" lang="en" dir="ltr">English</a>
+      </nav>
+    </div>
+    <div class="hero-body">
+      <img class="app-icon" src="assets/icon-256.webp" width="112" height="112" alt="أيقونة تطبيق سكينة: قبة ومئذنتان ذهبيتان على خلفية تركوازية">
+      <h1>سكينة</h1>
+      <p class="tagline">رفيق يومك، وطمأنينة قلبك</p>
+      <p class="lead">مواقيت الصلاة والأذان، وأذكار حصن المسلم، والقرآن الكريم، واتجاه القبلة، والصيام، في تطبيق واحد بلا إعلانات ولا حساب، وبياناتك تبقى على جهازك.</p>
+      <div class="cta">
+        <button class="btn-soon" type="button" disabled aria-disabled="true">قريبًا على <bdi>Google Play</bdi></button>
+        <small>التطبيق غير منشور بعد، ولا يوجد رابط تنزيل حاليًا.</small>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="section" id="features" aria-labelledby="h-features">
+  <div class="wrap">
+    <p class="eyebrow">المميزات</p>
+    <h2 id="h-features">ما تحتاجه ليومك في تطبيق واحد</h2>
+    <ul class="grid">
+      <li class="card">
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <h3>مواقيت الصلاة على جهازك</h3>
+        <p>تُحسب المواقيت داخل التطبيق دون إنترنت، فتعمل في أي مكان. عشر طرق حساب، واختيار مذهب العصر، وتعديل يدوي بالدقائق ليوافق تقويم مسجدك.</p>
+      </li>
+      <li class="card">
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9a6 6 0 1 1 12 0c0 5 2 6.5 2 6.5H4S6 14 6 9z"/><path d="M10 19a2 2 0 0 0 4 0"/></svg></div>
+        <h3>الأذان والتنبيهات</h3>
+        <p>أذان محفوظ داخل التطبيق ويعمل دون إنترنت، وتختار لكل صلاة: أذان أو إشعار فقط أو إيقاف. وتُعاد جدولة التنبيهات تلقائيًا بعد إعادة تشغيل الهاتف.</p>
+      </li>
+      <li class="card">
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5h11a3 3 0 0 1 3 3V20H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/><path d="M12 4.5v5l1.5-1.2L15 9.5v-5"/></svg></div>
+        <h3>أذكار حصن المسلم</h3>
+        <p>أذكار الصباح والمساء، وبعد الصلاة والنوم، وأبواب الكتاب كاملة (<bdi>132</bdi> بابًا)، مع مفضلة لما تعود إليه ومسبحة إلكترونية.</p>
+      </li>
+      <li class="card">
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v13c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-13c-4 0-6.5.5-8 2z"/><path d="M12 6.5v13"/></svg></div>
+        <h3>القرآن الكريم</h3>
+        <p>النص العثماني برواية حفص مضمّن في التطبيق، تقرؤه دون إنترنت، مع علامة قراءة وتسجيل لختمتك. والتلاوة والتفسير الميسّر لكل آية يحتاجان إنترنت.</p>
+      </li>
+      <li class="card">
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></div>
+        <h3>اتجاه القبلة</h3>
+        <p>بوصلة تعتمد على حساس الجهاز، وحساب الاتجاه يتم على جهازك. وإن لم يتوفر حساس البوصلة في جهازك فلن تعمل البوصلة الحية.</p>
+      </li>
+      <li class="card">
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></div>
+        <h3>الصيام</h3>
+        <p>إمساكية رمضان بوقت الإمساك والإفطار بحسب مدينتك، وأيام الصيام المسنونة القادمة: الاثنين والخميس، والأيام البيض، وعرفة، وعاشوراء، وست شوال.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="video" aria-labelledby="h-video" style="padding-top:0">
+  <div class="wrap" style="max-width:420px;text-align:center">
+    <p class="eyebrow" style="justify-content:center">فيديو</p>
+    <h2 id="h-video">سكينة في نصف دقيقة</h2>
+    <video controls preload="none" playsinline poster="assets/video-poster.jpg" width="360" height="640" style="width:100%;height:auto;aspect-ratio:9/16;border-radius:20px;margin-top:16px;background:#052d32" aria-label="فيديو تعريفي قصير بتطبيق سكينة، بلا صوت">
+      <source src="assets/sakina-intro.mp4" type="video/mp4">
+      متصفحك لا يدعم تشغيل الفيديو.
+    </video>
+    <p style="color:var(--muted);font-size:.9rem;margin-top:8px">فيديو بلا صوت.</p>
+  </div>
+</section>
+
+<section class="section" id="screens" aria-labelledby="h-screens" style="padding-top:0">
+  <div class="wrap">
+    <div class="strip-head">
+      <div>
+        <p class="eyebrow">اللقطات</p>
+        <h2 id="h-screens">لمحة من التطبيق</h2>
+      </div>
+      <p class="hint">مرّر أفقيًا لرؤية المزيد</p>
+    </div>
+  </div>
+  <div class="strip-wrap">
+    <div class="strip" role="region" aria-label="لقطات من تطبيق سكينة" tabindex="0">
+      <figure>
+        <img src="assets/shot-home.webp" width="540" height="960" loading="lazy" decoding="async" alt="الشاشة الرئيسية في سكينة: عدّ تنازلي لصلاة الظهر، وحالة «الأذان يعمل»، وزر أذكار الصباح">
+        <figcaption><b>الرئيسية</b>عدّ تنازلي للصلاة القادمة</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/shot-prayers.webp" width="540" height="960" loading="lazy" decoding="async" alt="شاشة مواقيت الصلاة: أوقات الفجر والشروق والظهر والعصر والمغرب والعشاء، والظهر هي الصلاة التالية">
+        <figcaption><b>مواقيت الصلاة</b>بحسب موقعك وطريقة الحساب</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/shot-quran.webp" width="540" height="960" loading="lazy" decoding="async" alt="شاشة المصحف بصفحة كاملة: أواخر سورة الإسراء ومطلع سورة الكهف بالنص العثماني">
+        <figcaption><b>القرآن الكريم</b>النص العثماني برواية حفص</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/shot-qibla.webp" width="540" height="960" loading="lazy" decoding="async" alt="شاشة اتجاه القبلة: بوصلة والكعبة في أعلاها، وعبارة «الهاتف يتجه نحو القبلة»">
+        <figcaption><b>اتجاه القبلة</b>بوصلة بحساس الجهاز</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/shot-adhkar.webp" width="540" height="960" loading="lazy" decoding="async" alt="شاشة حصن المسلم: أقسام أذكار الصباح والمساء، وأذكار النوم، وأذكار بعد الصلاة">
+        <figcaption><b>أذكار حصن المسلم</b>أقسام الكتاب وأبوابه</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/shot-fasting.webp" width="540" height="960" loading="lazy" decoding="async" alt="شاشة الصيام: وقت الإمساك والإفطار في رمضان، وجدول إمساكية رمضان">
+        <figcaption><b>الصيام</b>إمساكية رمضان بحسب مدينتك</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/shot-friday.webp" width="540" height="960" loading="lazy" decoding="async" alt="شاشة يوم الجمعة: بطاقة «فضل يوم الجمعة» بحديث وآية الصلاة على النبي">
+        <figcaption><b>يوم الجمعة</b>الصلاة على النبي ﷺ وسورة الكهف</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section velvet privacy" id="privacy" aria-labelledby="h-privacy">
+  <div class="wrap">
+    <p class="eyebrow">خصوصيتك</p>
+    <h2 id="h-privacy">بياناتك تبقى عندك</h2>
+    <p class="lead">ثلاث نقاط واضحة عن طريقة عمل التطبيق.</p>
+    <ul class="points">
+      <li class="point">
+        <div class="num" aria-hidden="true"><bdi>1</bdi></div>
+        <h3>المواقيت والقبلة تُحسب على جهازك</h3>
+        <p>تُحسب المواقيت واتجاه القبلة داخل التطبيق دون إنترنت، والموقع اختياري. الاستثناء الوحيد بطاقة الطقس: ترسل إحداثيات مقرّبة لخدمة Open-Meteo، ويمكنك إيقافها من الإعدادات.</p>
+      </li>
+      <li class="point">
+        <div class="num" aria-hidden="true"><bdi>2</bdi></div>
+        <h3>بلا إعلانات ولا حسابات</h3>
+        <p>لا إعلانات في التطبيق، ولا تسجيل دخول ولا إنشاء حساب. تفتحه وتبدأ.</p>
+      </li>
+      <li class="point">
+        <div class="num" aria-hidden="true"><bdi>3</bdi></div>
+        <h3>بلا أدوات تحليل ولا تتبع</h3>
+        <p>إعداداتك وبياناتك محفوظة على جهازك، ويمكنك إنشاء نسخة احتياطية في ملف تختار مكانه.</p>
+      </li>
+    </ul>
+    <p class="policy">للتفاصيل الكاملة اقرأ <a href="privacy.html">سياسة الخصوصية</a>.</p>
+  </div>
+</section>
+
+<section class="section" id="notes" aria-labelledby="h-notes">
+  <div class="wrap">
+    <p class="eyebrow">ملاحظات</p>
+    <h2 id="h-notes">قبل أن تبدأ</h2>
+    <ul class="notes">
+      <li><b>المواقيت:</b> تُحسب بالمعادلات الفلكية، وقد تختلف دقائق عن تقويم مسجدك المحلي. راجع تقويم مسجدك واستخدم التعديل اليدوي عند الحاجة.</li>
+      <li><b>التاريخ الهجري:</b> بتقويم أم القرى، وقد يختلف يومًا عن رؤية الهلال في بلدك. اعتمد إعلان الجهة المختصة في بلدك لبداية رمضان والعيدين.</li>
+      <li><b>التنبيهات:</b> تحتاج إلى السماح بالإشعارات والمنبّهات الدقيقة. وإن أوقف جهازك التطبيقات في الخلفية، ففي التطبيق إرشاد لضبط إعدادات البطارية.</li>
+      <li><b>المصادر:</b> مصادر النصوص والبيانات مفصّلة داخل التطبيق في صفحة «عن سكينة».</li>
+    </ul>
+    <div class="closing">
+      <button class="btn-soon" type="button" disabled aria-disabled="true">قريبًا على <bdi>Google Play</bdi></button>
+      <small>التطبيق غير منشور بعد.</small>
+    </div>
+  </div>
+</section>
+
+<section class="section en" id="en" lang="en" dir="ltr" aria-labelledby="h-en">
+  <div class="wrap">
+    <p class="eyebrow">English</p>
+    <h2 id="h-en">Sakinah: Prayer Times &amp; Adhkar</h2>
+    <p class="lead">Sakinah is a calm daily companion: prayer times and adhan, Hisn al-Muslim adhkar, the Holy Quran and the Qibla direction in one app. No ads, no account, and your data stays on your device.</p>
+    <ul>
+      <li>Prayer times are calculated on your device with no internet needed. Ten calculation methods, and a manual adjustment of -30 to +30 minutes for each prayer.</li>
+      <li>Adhan stored inside the app and playable without internet. Choose per prayer: adhan, notification only, or off.</li>
+      <li>Hisn al-Muslim adhkar: all 132 chapters, favourites and a digital tasbih counter.</li>
+      <li>Uthmani text in the Hafs recitation, readable offline.</li>
+      <li>A Qibla compass that uses your device sensor, with the direction calculated on the device.</li>
+      <li>A Ramadan imsakiya and the upcoming recommended fasting days.</li>
+    </ul>
+    <p class="small"><strong>Privacy:</strong> no ads, no account, no analytics or tracking. Prayer times and Qibla are calculated on your device. Read the <a href="privacy.html">Privacy Policy</a>.</p>
+    <p class="small">Prayer times can differ by a few minutes from your local mosque timetable. The app interface is in Arabic.</p>
+    <p class="small"><strong>Coming soon to Google Play.</strong> The app is not published yet, so there is no download link.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="velvet">
+  <div class="wrap">
+    <p class="pub">الناشر: م. ريم الفضلي · <a href="https://iconreem.com"><bdi>iconreem.com</bdi></a></p>
+    <p class="meta">
+      <span>التواصل: <a href="mailto:hello@iconreem.com"><bdi>hello@iconreem.com</bdi></a></span>
+      <span><a href="privacy.html">سياسة الخصوصية</a></span>
+    </p>
+    <p class="legal">الخط: <bdi>IBM Plex Sans Arabic</bdi> بترخيص <bdi>SIL OFL</bdi>.</p>
+  </div>
+</footer>
+</body>
+</html>
